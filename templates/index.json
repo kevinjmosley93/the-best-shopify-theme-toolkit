@@ -1,0 +1,17 @@
+{
+  "sections": {
+    "header": {
+      "type": "header"
+    },
+    "hero": {
+      "type": "hero"
+    },
+    "test": {
+      "type": "test"
+    },
+    "footer": {
+      "type": "footer"
+    }
+  },
+  "order": ["header", "hero", "test", "footer"]
+}

@@ -1,0 +1,12 @@
+/frontend-dev
+/node_modules
+.env
+.gitignore
+bun.lockb
+index.html
+jsconfig.json
+package-lock.json
+package.json
+README.md
+scripts.js
+vite.config.js

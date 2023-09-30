@@ -1,0 +1,33 @@
+{
+  "frontend-dev/entrypoints/App.jsx": {
+    "file": "App-c7dca5d6.js",
+    "isEntry": true,
+    "src": "frontend-dev/entrypoints/App.jsx"
+  },
+  "frontend-dev/entrypoints/App.scss": {
+    "file": "App-3c452088.css",
+    "isEntry": true,
+    "src": "frontend-dev/entrypoints/App.scss"
+  },
+  "frontend-dev/entrypoints/assets/react.svg": {
+    "file": "react-4ed993c7.js",
+    "isEntry": true,
+    "src": "frontend-dev/entrypoints/assets/react.svg"
+  },
+  "frontend-dev/entrypoints/main.jsx": {
+    "css": [
+      "App-3c452088.css"
+    ],
+    "file": "main-7ce8213d.js",
+    "imports": [
+      "frontend-dev/entrypoints/App.jsx"
+    ],
+    "isEntry": true,
+    "src": "frontend-dev/entrypoints/main.jsx"
+  },
+  "frontend-dev/entrypoints/reset.scss": {
+    "file": "reset-eb12157f.css",
+    "isEntry": true,
+    "src": "frontend-dev/entrypoints/reset.scss"
+  }
+}

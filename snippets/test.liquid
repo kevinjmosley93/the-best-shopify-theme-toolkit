@@ -1,0 +1,5 @@
+{%- for collection in collections -%}
+  {%- if collection.title == 'home' -%}
+    <h1 class="test-snippet">{{ collection.products.length }} products in the {{ collection.title }} collection</h1>
+  {%- endif -%}
+{%- endfor -%}

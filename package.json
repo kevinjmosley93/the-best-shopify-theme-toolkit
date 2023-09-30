@@ -1,0 +1,43 @@
+{
+  "name": "best-shopify-dev-tool",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "run-p -sr \"watch\" \"shopify:dev -- {@}\" \"vite:dev\" --",
+    "deploy": "run-s \"build\" \"shopify:push -- {@}\" --",
+    "shopify:dev": "shopify theme dev",
+    "vite:dev": "cross-env DEBUG=vite-plugin-shopify:* bunx vite",
+    "shopify:push": "shopify theme push",
+    "build": "cross-env DEBUG=vite-plugin-shopify:* bunx vite build",
+    "write-sections": "bun scripts.js",
+    "start:dev": "npm run dev -- --store test-mcgee --live-reload full-page",
+    "watch": "bun scripts.js",
+    "deploy:dev": "npm run deploy -- --store test-mcgee --unpublished"
+  },
+  "dependencies": {
+    "@shopify/shopify-api": "^7.7.0",
+    "@shopify/shopify-app-express": "^2.2.4",
+    "cross-env": "^7.0.3",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "npm-run-all": "^4.1.5",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-liquid": "^2.0.1",
+    "shopify-api-node": "^3.12.6",
+    "shopify-token": "^4.1.0",
+    "vite-plugin-shopify": "^2.2.1"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.15",
+    "@types/react-dom": "^18.2.7",
+    "@vitejs/plugin-react": "^4.0.3",
+    "eslint": "^8.45.0",
+    "eslint-plugin-react": "^7.32.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.4.3",
+    "sass": "^1.68.0",
+    "vite": "^4.4.5"
+  }
+}

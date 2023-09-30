@@ -1,0 +1,79 @@
+{% assign selectedVariant = product.first_or_selected_variant %}
+
+<div class="product-page">
+  <div class="width">
+    <div class="product">
+      <div class="product-image">
+        <img src="{{ product.featured_image | image_url: 'master' }}" width="200" height="200" loading="lazy">
+      </div>
+
+      <div class="product-content">
+        <h2>{{ product.title }}</h2>
+        <p class="produce-price">{{ selectedVariant.price | money }}</p>
+
+        <div class="product-description ">
+          {{ product.description }}
+        </div>
+
+        {% form 'product', product %}
+          <label class="product-option">Options</label>
+          <select class="product-select" name="id">
+            {% for variant in product.variants %}
+              <option
+                {% if selectedVariant.id == variant.id %}
+                  selected
+                {% endif %}
+                value="{{ variant.id }}"
+              >
+                {{ variant.title }}
+              </option>
+            {% endfor %}
+          </select>
+
+          <div class="product-quantity">
+            <label for="quantity">Quantity</label>
+            <input name="quantity" id="quantity" value="1">
+          </div>
+
+          <button class="button product-add" type="submit">Add to cart</button>
+        {% endform %}
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  const addToCartForms = document.querySelectorAll('form[action='/cart/add']')
+
+  addToCartForms.forEach(form)=>{
+  form.addEventListener(submit,async(event)=>{
+        await fetch("/cart/add",{
+          method:"post",
+          body: new FormData(form)
+        })
+  })
+
+
+  }
+</script>
+
+<style>
+  .main-product-form option {
+    /* position: absolute; */
+    display: inline-block;
+    width: 4rem;
+    text-align: center;
+    height: 2rem;
+    /* line-height: 2rem; */
+    /* display: flex; */
+    /* flex-direction: row; */
+    outline: 1px solid #444;
+    margin: 5px;
+  }
+
+  .main-product-form select {
+    border: none;
+    outline: none;
+    overflow: hidden;
+    height: 3rem;
+  }
+</style>
