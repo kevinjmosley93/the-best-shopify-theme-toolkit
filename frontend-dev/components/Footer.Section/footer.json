@@ -1,11 +1,11 @@
 {
-    "name": "Header",
-    "settings": [
-      {
-        "type": "link_list",
-        "id": "menu",
-        "default": "main-menu",
-        "label": "Heading Navigation Menu"
-      }
-    ]
-  }
+  "name": "Foooooooterrrrr",
+  "settings": [
+    {
+      "type": "text",
+      "id": "footer_name",
+      "default": "This is footer",
+      "label": "footer name"
+    }
+  ]
+}

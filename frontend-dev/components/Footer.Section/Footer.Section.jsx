@@ -17,11 +17,6 @@ const Footer = () => {
         "default": "This is footer",
         "label": "footer name"
       }
-    ],
-    "presets": [
-      {
-        "name": "Foooooooterrrrr"
-      }
     ]
   }
 {% endschema %}`;

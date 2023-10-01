@@ -1,6 +1,6 @@
 {
   "frontend-dev/entrypoints/App.jsx": {
-    "file": "App-4a0f15f7.js",
+    "file": "App-b2f0a26f.js",
     "isEntry": true,
     "src": "frontend-dev/entrypoints/App.jsx"
   },
@@ -18,7 +18,7 @@
     "css": [
       "App-e20ed62c.css"
     ],
-    "file": "main-59be9fd3.js",
+    "file": "main-20bae93c.js",
     "imports": [
       "frontend-dev/entrypoints/App.jsx"
     ],
