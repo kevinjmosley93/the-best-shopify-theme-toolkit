@@ -1,0 +1,17 @@
+{
+  "name": "Test",
+  "class": "section-test",
+  "settings": [
+    {
+      "type": "text",
+      "id": "test",
+      "default": "This is testinnggggg",
+      "label": "test name"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Testinggggggg"
+    }
+  ]
+}

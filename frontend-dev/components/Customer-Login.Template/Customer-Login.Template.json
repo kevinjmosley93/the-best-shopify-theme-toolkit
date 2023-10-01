@@ -1,0 +1,11 @@
+{
+  "name": "Customer Login",
+  "settings": [
+    {
+      "type": "text",
+      "id": "menu",
+      "default": "Customer Login",
+      "label": "Customer Login"
+    }
+  ]
+}

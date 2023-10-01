@@ -11,10 +11,14 @@ async function initScripts() {
 
     const sections = filePaths.filter((path) => path.includes(".Section"));
     const snippets = filePaths.filter((path) => path.includes(".Snippet"));
+    const templates = filePaths.filter((path) => path.includes(".Template"));
+
+    console.log("templates", templates);
+
     await watchSections(sections);
     await watchSnippets(snippets);
+    await watchTemplates(templates);
 
-    // console.log("section", sectionFiles);
     return { sections, snippets };
   } catch (err) {
     console.error(err); // depending on your application, this `catch` block (as-is) may be inappropriate; consider instead, either not-catching and/or re-throwing a new Error with the previous err attached.
@@ -55,6 +59,23 @@ async function watchSnippets(snippets) {
     );
   });
 }
+async function watchTemplates(templates) {
+  templates.forEach((template) => {
+    var mySubString = template.substring(
+      template.lastIndexOf("/") + 1,
+      template.lastIndexOf(".")
+    );
+console.log(`${import.meta.dir}/${template}/${mySubString.toLowerCase()}-template.liquid`)
+    watch(
+      `${import.meta.dir}/${template}/${mySubString.toLowerCase()}-template.liquid`,
+      (event) => {
+        if (event === "change") {
+          updateTemplateFiles(template, mySubString);
+        }
+      }
+    );
+  });
+}
 
 async function updateSectionFiles(section, mySubString) {
   let file = Bun.file(`./${section}/${mySubString.toLowerCase()}.liquid`);
@@ -72,6 +93,15 @@ async function updateSnippetFiles(snippet, mySubString) {
 
   console.log(`${snippet}/${mySubString.toLowerCase()}.liquid file modified:`);
   console.log(`snippets/${mySubString.toLowerCase()}.liquid file created:`);
+}
+
+async function updateTemplateFiles(section, mySubString) {
+  let file = Bun.file(`./${section}/${mySubString.toLowerCase()}-template.liquid`);
+
+  Bun.write(`./sections/${mySubString.toLowerCase()}-template.liquid`, file);
+
+  console.log(`${section}/${mySubString.toLowerCase()}-template.liquid file modified:`);
+  console.log(`sections/${mySubString.toLowerCase()}-template.liquid file created:`);
 }
 
 console.log("initScripts server.js", await initScripts());

@@ -1,11 +1,11 @@
 {
   "frontend-dev/entrypoints/App.jsx": {
-    "file": "App-c7dca5d6.js",
+    "file": "App-4a0f15f7.js",
     "isEntry": true,
     "src": "frontend-dev/entrypoints/App.jsx"
   },
   "frontend-dev/entrypoints/App.scss": {
-    "file": "App-3c452088.css",
+    "file": "App-e20ed62c.css",
     "isEntry": true,
     "src": "frontend-dev/entrypoints/App.scss"
   },
@@ -16,9 +16,9 @@
   },
   "frontend-dev/entrypoints/main.jsx": {
     "css": [
-      "App-3c452088.css"
+      "App-e20ed62c.css"
     ],
-    "file": "main-7ce8213d.js",
+    "file": "main-59be9fd3.js",
     "imports": [
       "frontend-dev/entrypoints/App.jsx"
     ],

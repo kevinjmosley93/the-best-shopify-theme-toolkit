@@ -1,9 +1,6 @@
 {
-  "current": {
-    "sections": {
-      
-      
-      
-    }
+  "current": "Default",
+  "presets": {
+    "Default": { }
   }
 }

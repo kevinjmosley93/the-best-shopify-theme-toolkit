@@ -1,4 +1,4 @@
-/frontend-dev
+/frontend-dev/*
 /node_modules
 .env
 .gitignore

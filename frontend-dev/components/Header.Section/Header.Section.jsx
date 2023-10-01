@@ -3,30 +3,47 @@ import { ReactLiquid } from "react-liquid";
 
 const Header = () => {
   const template = `
-<header class="main-header">
-  <h1>Hello world</h1>
-</header>  
-
-
-{% schema %}
-{
-  "name": "Header",
-  "class": "main-header",
-  "settings": [
-    {
-      "type": "text",
-      "id": "header_name",
-      "default": "This is header",
-      "label": "header name"
-    }
-  ],
-  "presets": [
-    {
-      "name": "HEader"
-    }
-  ]
-}
-{% endschema %}`;
+  {% liquid 
+    if section.settings.menu.links == blank
+      assign main_menu_linklist = linklists[section.settings.menu].links
+    else
+      assign main_menu_linklist = section.settings.menu.links
+    endif
+  %}
+  
+  <header id="header" class="header">
+    <nav role="navigation">
+      {% for link in main_menu_linklist %}
+        {% if link.links != blank %}
+          {% assign link_handle = link.handle | replace: '-', '_' %}
+          {% for childlink in link.links %}
+            <a href="{{ childlink.url }}">{{ childlink.title }}</a>
+          {% endfor %}     
+        {% else %}
+          <a href="{{ link.url }}">{{ link.title }}</a>
+        {% endif %}
+      {% endfor %}
+      <form action="{{ routes.search_url }}" method="get">
+        <input type="search" name="q" placeholder="Search">
+        <button type="submit">Search</button>
+      </form>
+    </nav>     
+  </header>
+          
+  
+  {% schema %}
+  {
+    "name": "Header",
+    "settings": [
+      {
+        "type": "link_list",
+        "id": "menu",
+        "default": "main-menu",
+        "label": "Headingggg Navigation Menu"
+      }
+    ]
+  }
+  {% endschema %}`;
 
   const data = { header_name: "This is the header" };
   return <ReactLiquid template={template} data={data} html />;

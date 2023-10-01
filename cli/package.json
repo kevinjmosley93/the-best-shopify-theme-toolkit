@@ -1,6 +1,6 @@
 {
   "name": "best-shopify-theme-toolkit-cli",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A React + Vite Shopify Theme building cli to speed up Shopify Theme development",
   "main": "index.js",
   "type": "module",

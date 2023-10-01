@@ -1,17 +1,14 @@
 {
   "sections": {
-    "header": {
-      "type": "header"
+    "store-name": {
+      "type": "store-name"
     },
-    "hero": {
-      "type": "hero"
-    },
-    "test": {
-      "type": "test"
-    },
-    "footer": {
-      "type": "footer"
+    "featured-collection": {
+      "type": "featured-collection",
+      "settings": {
+        "featured-collection": "all"
+      }
     }
   },
-  "order": ["header", "hero", "test", "footer"]
+  "order": ["store-name", "featured-collection"]
 }
