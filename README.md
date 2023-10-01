@@ -8,9 +8,12 @@ npm run deploy:dev
 ```
 
 ## Generate theme files from cli
-
 ```console
 npm i best-shopify-theme-toolkit-cli
+```
+
+```console
+touch index.js
 ```
 
 ```javascript
