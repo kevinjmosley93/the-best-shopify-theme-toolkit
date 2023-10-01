@@ -1,5 +1,7 @@
 import * as p from "@clack/prompts";
 import shell from "shelljs";
+import fs from "fs/promises";
+import path from "path";
 
 export async function init() {
   const group = await p.group(
@@ -22,35 +24,38 @@ export async function init() {
       directory: ({ results }) =>
         p.text({
           message: `What directory would you like to install your files?`,
-          placeholder:
-            "use '.' for current directory or something like './example-folder'",
+          placeholder: "./example-folder",
         }),
       ranScript: async ({ results }) => {
         shell.exec(`
           git clone https://github.com/kevinjmosley93/the-best-shopify-theme-toolkit ${
             results.directory
           }
-          ${
-            results.directory !== "." ||
-            (results.directory !== "./" && "cd " + results.directory)
-          }
-          npm install --legacy-peer-deps
+          ${"cd " + results.directory} && npm install --legacy-peer-deps
         `);
+        try {
+          const file = await fs.readFile(`${results.directory}/package.json`, {
+            encoding: "utf8",
+          });
 
-        let file = Bun.file(`${results.directory}/package.json`);
+          // console.log("file", JSON.parse(file));
+          let json = structuredClone(JSON.parse(file));
 
-        let json = structuredClone(await file.json());
+          json.name = results.themeName;
 
-        json.name = results.themeName;
-
-        json.scripts[
-          "start:dev"
-        ] = `npm run dev -- --store ${results.storeName} --live-reload full-page`;
-        json.scripts[
-          "deploy:dev"
-        ] = `npm run dev -- --store ${results.storeName} --unpublished`;
-
-        Bun.write(`${results.directory}/package.json`, JSON.stringify(json));
+          json.scripts[
+            "start:dev"
+          ] = `npm run dev -- --store ${results.storeName} --live-reload full-page`;
+          json.scripts[
+            "deploy:dev"
+          ] = `npm run dev -- --store ${results.storeName} --unpublished`;
+          fs.writeFile(
+            `${results.directory}/package.json`,
+            JSON.stringify(json)
+          );
+        } catch (err) {
+          console.error(err.message);
+        }
 
         console.log(
           `Your theme files are ready 🥳; ${
@@ -73,4 +78,4 @@ export async function init() {
     }
   );
 }
-await init()
+await init();
