@@ -48,7 +48,7 @@ export async function init() {
           ] = `npm run dev -- --store ${results.storeName} --live-reload full-page`;
           json.scripts[
             "deploy:dev"
-          ] = `npm run dev -- --store ${results.storeName} --unpublished`;
+          ] = `npm run deploy -- --store ${results.storeName} --unpublished`;
           fs.writeFile(
             `${results.directory}/package.json`,
             JSON.stringify(json)
@@ -78,4 +78,3 @@ export async function init() {
     }
   );
 }
-await init();
