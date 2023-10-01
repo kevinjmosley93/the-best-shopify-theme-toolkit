@@ -1,3 +1,20 @@
 [
-
+  {
+    "name": "barebones_best_shopify_theme_toolkit",
+    "theme_name": "Barbones Theme",
+    "theme_version": "1.0.0",
+    "theme_author": "Kevin J Mosley",
+    "theme_documentation_url": "https://help.shopify.com/manual/online-store/themes",
+    "theme_support_url": "https://support.shopify.com/"
+  },
+  {
+    "name": "Test Theme Settings",
+    "settings": [
+      {
+        "type": "text",
+        "id": "test_settings_schema",
+        "label": "Test Theme Settings"
+      }
+    ]
+  }
 ]
