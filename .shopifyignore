@@ -4,6 +4,7 @@
 .gitignore
 bun.lockb
 index.html
+/cli/index.js
 jsconfig.json
 package-lock.json
 package.json

@@ -1,8 +1,12 @@
 ## Start dev server
 ```console
-bun run start:dev
+npm run start:dev
 ```
 ## Deploy dev theme to admin
 ```console
-bun run deploy:dev
+npm run deploy:dev
+```
+## Generate theme files from cli
+```console
+node cli/index.js
 ```

@@ -16,6 +16,7 @@
     "deploy:dev": "npm run deploy -- --store test-mcgee --unpublished"
   },
   "dependencies": {
+    "@clack/prompts": "^0.7.0",
     "@shopify/shopify-api": "^7.7.0",
     "@shopify/shopify-app-express": "^2.2.4",
     "cross-env": "^7.0.3",
@@ -25,6 +26,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-liquid": "^2.0.1",
+    "shelljs": "^0.8.5",
     "shopify-api-node": "^3.12.6",
     "shopify-token": "^4.1.0",
     "vite-plugin-shopify": "^2.2.1"
