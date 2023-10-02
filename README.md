@@ -1,4 +1,10 @@
-## Start dev server
+#Get toolkit running locally
+```console
+git clone https://github.com/kevinjmosley93/the-best-shopify-theme-toolkit .
+```
+```console
+npm i
+```
 ```console
 npm run start:dev
 ```
