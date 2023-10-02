@@ -1,0 +1,19 @@
+<section class="test-page {{ template.name }}">
+  <h1>{{ page.title }}</h1>
+  {{ section.settings.test_page }}
+  {{ page.content }}
+</section>
+
+{% schema %}
+  {
+    "name": "Test Page",
+    "settings": [
+      {
+        "type": "text",
+        "id": "test_page",
+        "default": "Testingg a Pagee",
+        "label": "Test Page"
+      }
+    ]
+  }
+{% endschema %}

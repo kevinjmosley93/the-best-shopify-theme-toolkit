@@ -12,96 +12,102 @@ async function initScripts() {
     const sections = filePaths.filter((path) => path.includes(".Section"));
     const snippets = filePaths.filter((path) => path.includes(".Snippet"));
     const templates = filePaths.filter((path) => path.includes(".Template"));
+    const pages = filePaths.filter((path) => path.includes(".Page"));
 
-    console.log("templates", templates);
+    await watchFiles("sections", sections, "");
+    await watchFiles("snippets", snippets, "");
+    await watchFiles("templates", templates, "-template");
+    await watchFiles("pages", pages, "");
 
-    await watchSections(sections);
-    await watchSnippets(snippets);
-    await watchTemplates(templates);
-
-    return { sections, snippets };
+    return { sections, snippets, templates, pages };
   } catch (err) {
     console.error(err); // depending on your application, this `catch` block (as-is) may be inappropriate; consider instead, either not-catching and/or re-throwing a new Error with the previous err attached.
   }
 }
 
-async function watchSections(sections) {
-  sections.forEach((section) => {
-    var mySubString = section.substring(
-      section.lastIndexOf("/") + 1,
-      section.lastIndexOf(".")
+async function useSubString(filePath) {
+  return filePath.substring(
+    filePath.lastIndexOf("/") + 1,
+    filePath.lastIndexOf(".")
+  );
+}
+
+async function updateFiles(
+  fileFolderName,
+  filePath,
+  fileSubString,
+  alternateName
+) {
+  let file = Bun.file(
+    `./${filePath}/${fileSubString.toLowerCase()}${
+      alternateName && alternateName
+    }.liquid`
+  );
+
+  Bun.write(
+    `${
+      fileFolderName === "snippets" ? "snippets" : "sections"
+    }/${fileSubString.toLowerCase()}${alternateName && alternateName}.liquid`,
+    file
+  );
+
+  if (fileFolderName === "pages") {
+    const json = {
+      sections: {
+        template: {
+          type: `${fileSubString.toLowerCase()}${
+            alternateName && alternateName
+          }`,
+        },
+      },
+      order: ["template"],
+    };
+
+    Bun.write(
+      `templates/page.${fileSubString.toLowerCase()}${
+        alternateName && alternateName
+      }.json`,
+      JSON.stringify(json)
     );
+  }
+
+  console.log(
+    `./${filePath}/${fileSubString.toLowerCase()}${
+      alternateName && alternateName
+    }.liquid file modified:`
+  );
+  console.log(
+    `${
+      fileFolderName === "snippets" ? "snippets" : "sections"
+    }/${fileSubString.toLowerCase()}${
+      alternateName && alternateName
+    }.liquid file created:`
+  );
+
+  if (fileFolderName === "pages") {
+    console.log(
+      `templates/page.${fileSubString.toLowerCase()}${
+        alternateName && alternateName
+      }.json file created:`
+    );
+  }
+}
+
+async function watchFiles(folderName, filePath, alternateName) {
+  filePath.forEach(async (filePath) => {
+    let mySubString = await useSubString(filePath);
 
     watch(
-      `${import.meta.dir}/${section}/${mySubString.toLowerCase()}.liquid`,
+      `${import.meta.dir}/${filePath}/${mySubString.toLowerCase()}${
+        alternateName && alternateName
+      }.liquid`,
       (event) => {
         if (event === "change") {
-          updateSectionFiles(section, mySubString);
+          updateFiles(folderName, filePath, mySubString, alternateName);
         }
       }
     );
   });
-}
-async function watchSnippets(snippets) {
-  snippets.forEach((snippet) => {
-    var mySubString = snippet.substring(
-      snippet.lastIndexOf("/") + 1,
-      snippet.lastIndexOf(".")
-    );
-
-    watch(
-      `${import.meta.dir}/${snippet}/${mySubString.toLowerCase()}.liquid`,
-      (event) => {
-        if (event === "change") {
-          updateSnippetFiles(snippet, mySubString);
-        }
-      }
-    );
-  });
-}
-async function watchTemplates(templates) {
-  templates.forEach((template) => {
-    var mySubString = template.substring(
-      template.lastIndexOf("/") + 1,
-      template.lastIndexOf(".")
-    );
-console.log(`${import.meta.dir}/${template}/${mySubString.toLowerCase()}-template.liquid`)
-    watch(
-      `${import.meta.dir}/${template}/${mySubString.toLowerCase()}-template.liquid`,
-      (event) => {
-        if (event === "change") {
-          updateTemplateFiles(template, mySubString);
-        }
-      }
-    );
-  });
-}
-
-async function updateSectionFiles(section, mySubString) {
-  let file = Bun.file(`./${section}/${mySubString.toLowerCase()}.liquid`);
-
-  Bun.write(`./sections/${mySubString.toLowerCase()}.liquid`, file);
-
-  console.log(`${section}/${mySubString.toLowerCase()}.liquid file modified:`);
-  console.log(`sections/${mySubString.toLowerCase()}.liquid file created:`);
-}
-
-async function updateSnippetFiles(snippet, mySubString) {
-  let file = Bun.file(`./${snippet}/${mySubString.toLowerCase()}.liquid`);
-
-  Bun.write(`./snippets/${mySubString.toLowerCase()}.liquid`, file);
-
-  console.log(`${snippet}/${mySubString.toLowerCase()}.liquid file modified:`);
-  console.log(`snippets/${mySubString.toLowerCase()}.liquid file created:`);
-}
-
-async function updateTemplateFiles(section, mySubString) {
-  let file = Bun.file(`./${section}/${mySubString.toLowerCase()}-template.liquid`);
-
-  Bun.write(`./sections/${mySubString.toLowerCase()}-template.liquid`, file);
-
-  console.log(`${section}/${mySubString.toLowerCase()}-template.liquid file modified:`);
-  console.log(`sections/${mySubString.toLowerCase()}-template.liquid file created:`);
 }
 
 console.log("initScripts server.js", await initScripts());

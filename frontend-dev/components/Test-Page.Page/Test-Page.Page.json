@@ -1,0 +1,16 @@
+{
+  "name": "Test Page",
+  "settings": [
+    {
+      "type": "text",
+      "id": "test_page",
+      "default": "Testinggg a Pagee",
+      "label": "Test Page"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Test"
+    }
+  ]
+}
