@@ -1,4 +1,4 @@
-#Get toolkit running locally
+# Get toolkit running locally
 ```console
 git clone https://github.com/kevinjmosley93/the-best-shopify-theme-toolkit .
 ```
