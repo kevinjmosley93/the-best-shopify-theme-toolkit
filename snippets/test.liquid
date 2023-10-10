@@ -1,7 +1,7 @@
 {%- for collection in collections -%}
 
   {%- if collection.title == 'home' -%}
-    {{ section.settings.test | capitalize }}
+    {{ section.settings.test | capitalize }} text!!!
     <h1 class="test-snippet">{{ collection.products.length }} products in the {{ collection.title }} collection</h1>
   {%- endif -%}
 {%- endfor -%}
