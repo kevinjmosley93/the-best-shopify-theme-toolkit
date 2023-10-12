@@ -11,9 +11,9 @@
     "shopify:push": "shopify theme push",
     "build": "cross-env DEBUG=vite-plugin-shopify:* bunx vite build",
     "write-sections": "bun scripts.js",
-    "start:dev": "npm run dev -- --store test-mcgee --live-reload full-page",
+    "start:dev": "npm run dev -- --store {your-store} --live-reload full-page",
     "watch": "bun scripts.js",
-    "deploy:dev": "npm run deploy -- --store test-mcgee --unpublished"
+    "deploy:dev": "npm run deploy -- --store {your-store} --unpublished"
   },
   "dependencies": {
     "@clack/prompts": "^0.7.0",
