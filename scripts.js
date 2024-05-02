@@ -72,23 +72,23 @@ async function updateFiles(
   }
 
   console.log(
-    `./${filePath}/${fileSubString.toLowerCase()}${
+    'file modified: ==============>',`./${filePath}/${fileSubString.toLowerCase()}${
       alternateName && alternateName
-    }.liquid file modified:`
+    }.liquid`
   );
   console.log(
-    `${
+    'file created: ==============>',`./${
       fileFolderName === "snippets" ? "snippets" : "sections"
     }/${fileSubString.toLowerCase()}${
       alternateName && alternateName
-    }.liquid file created:`
+    }.liquid`
   );
 
   if (fileFolderName === "pages") {
     console.log(
-      `templates/page.${fileSubString.toLowerCase()}${
+      "file created: ==============>",`./templates/page.${fileSubString.toLowerCase()}${
         alternateName && alternateName
-      }.json file created:`
+      }.json`
     );
   }
 }
